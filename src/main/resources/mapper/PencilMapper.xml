@@ -7,4 +7,9 @@
     <select id="getById" resultType="com.example.demo.MemberDto">
         SELECT NAME, AGE FROM MEMBER where ID = #{id, jdbcType=BIGINT}
     </select>
+    
+    <update id="increasePriceById">
+        UPDATE PENCIL SET PRICE = PRICE + 1
+        WHERE ID = #{id, jdbcType=BIGINT}
+    </update>
 </mapper>

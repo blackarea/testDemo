@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PencilMapper {
 
     MemberDto getById(long id);
+    void increasePriceById(long id);
 }

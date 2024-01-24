@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.MemberMapper">
+    <resultMap id="memberDto" type="com.example.demo.MemberDto">
+        <id property="id" column="ID"/>
+        <result property="age" column="AGE"/>
+        <result property="name" column="NAME"/>
+    </resultMap>
+
+    <insert id="createMember" parameterType="com.example.demo.MemberDto" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO MEMBER (name, age)
+        VALUES (#{name}, #{age})
+    </insert>
+
+    <insert id="createHoseok">
+        INSERT INTO MEMBER (name, age)
+        select name, age + 1
+        from MEMBER
+        where name = 'hoseok'
+        order by id desc limit 1;
+    </insert>
+
+
+    <select id="getAllMember" resultMap="memberDto">
+        SELECT ID, NAME, AGE
+        FROM MEMBER
+    </select>
+
+    <select id="getMemberByName" resultMap="memberDto" parameterType="java.lang.String">
+        SELECT NAME, AGE
+        FROM MEMBER
+        where NAME = #{name}
+    </select>
+
+    <select id="t" resultMap="memberDto">
+        SELECT NAME, AGE
+        FROM MEMBER
+        where AGE > 22
+    </select>
+
+    <select id="findMemberByNameAge" resultMap="memberDto">
+        SELECT ID, NAME, AGE FROM MEMBER
+        <where>
+            <if test="name != null ">
+                AND NAME = #{name, jdbcType=VARCHAR}
+            </if>
+            <choose>
+                <when test="age == 27">
+                    AND AGE = 27
+                </when>
+                <when test="age == 28">
+                    AND AGE = 28
+                </when>
+                <otherwise>
+                    AND AGE = 29
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+
+    <select id="findHoseoks" resultMap="memberDto">
+        SELECT NAME, AGE FROM MEMBER
+        <where>
+            <foreach item="item" collection="list" open="" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+    <insert id="insertMember">
+        INSERT INTO MEMBER (name, age)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+             #{item.name},
+             #{item.age}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

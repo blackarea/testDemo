@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pencil {
+public class PencilDto {
 
     private long member_id;
     private double price;
