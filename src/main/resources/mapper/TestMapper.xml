@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.TestMapper">
+    <resultMap id="memberDto" type="com.example.demo.MemberDto">
+        <id property="id" column="ID" />
+        <result property="age" column="AGE" />
+        <result property="name" column="NAME" />
+    </resultMap>
+
+    <select id="getAllMember" resultMap="memberDto">
+        SELECT NAME, AGE FROM MEMBER
+    </select>
+
+    <select id="getMemberByName" resultMap="memberDto" parameterType="java.lang.String">
+        SELECT NAME, AGE FROM MEMBER where NAME = #{name}
+    </select>
+
+    <select id="t" resultMap="memberDto">
+        SELECT NAME, AGE FROM MEMBER where AGE > 22
+    </select>
+
+</mapper>
