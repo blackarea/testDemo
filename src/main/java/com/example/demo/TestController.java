@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @RestController
 public class TestController {
@@ -19,23 +21,22 @@ public class TestController {
     public void test(){
 //        memberMapper.createMember(new MemberDto("hoseok", 27));
 //        memberMapper.createHoseok();
-//        List<MemberDto> hoseok = memberMapper.findMemberByNameAge("hoseok", 28);
 //        List<MemberDto> hoseoks = memberMapper.findHoseoks(List.of(27, 28, 29));
 //        System.out.println(hoseoks);
 
-        List<MemberDto> memberDtoList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            memberDtoList.add(new MemberDto("hoseok"+i, 30+i));
-        }
-        System.out.println(memberDtoList);
+//        List<MemberDto> memberDtoList = new ArrayList<>();
+//        List<MemberDto> list = IntStream.range(0, 3).mapToObj(i -> new MemberDto(("hoseok" + i), 30 + i)).toList();
+//        System.out.println(list);
+//
+//        memberMapper.insertMember(memberDtoList);
 
-        memberMapper.insertMember(memberDtoList);
+        List<MemberDto> hoseok = memberMapper.findMemberByNameAge("hoseok", 28);
+        System.out.println(hoseok);
 
-
-        List<MemberDto> allMemberDto = memberMapper.getAllMember();
+        /*List<MemberDto> allMemberDto = memberMapper.getAllMember();
         for (MemberDto memberDto : allMemberDto) {
             System.out.println("member = " + memberDto);
-        }
+        }*/
 
     }
 

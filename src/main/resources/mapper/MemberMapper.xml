@@ -43,7 +43,7 @@
     <select id="findMemberByNameAge" resultMap="memberDto">
         SELECT ID, NAME, AGE FROM MEMBER
         <where>
-            <if test="name != null ">
+            <if test='name.equals("hoseok")'>
                 AND NAME = #{name, jdbcType=VARCHAR}
             </if>
             <choose>
